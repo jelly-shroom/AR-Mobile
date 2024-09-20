@@ -6,50 +6,76 @@ using UnityEngine.UI;
 
 public class GeolocationHandler : MonoBehaviour
 {
-    // script to access and see where the user is in real time
     public TMPro.TMP_Text statusTxt;
+    private Coroutine gpsCoroutine;
+    private float updateInterval = 5f; // Update every 5 seconds
+    private float timer;
+
+    private void Start()
+    {
+        StartCoroutine(UpdateGPSLocation());
+    }
 
     void Update()
     {
-        GetUserLocation();
+
     }
 
 
-    public void GetUserLocation()
+    private IEnumerator UpdateGPSLocation()
     {
-        if (!Input.location.isEnabledByUser) //FIRST IM CHACKING FOR PERMISSION IF "true" IT MEANS USER GAVED PERMISSION FOR USING LOCATION INFORMATION
+        // Check if the user has location service enabled
+        if (!Input.location.isEnabledByUser)
         {
-            statusTxt.text = "No Permission";
-            Permission.RequestUserPermission(Permission.FineLocation);
+            Debug.Log("Location services not enabled");
+            yield break;
         }
-        else
-        {
-            statusTxt.text = "Permission Granted";
-            StartCoroutine(GetLatLonUsingGPS());
-        }
-    }
 
-    IEnumerator GetLatLonUsingGPS()
-    {
+        // Start service before querying location
         Input.location.Start();
-        int maxWait = 5;
+
+        // Wait until service initializes
+        int maxWait = 20;
         while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
         {
             yield return new WaitForSeconds(1);
             maxWait--;
         }
 
-        statusTxt.text = "waiting before getting lat and lon";
+        // If the service didn't initialize in 20 seconds this cancels location service use.
+        if (maxWait < 1)
+        {
+            Debug.Log("Timed out");
+            yield break;
+        }
 
-        // Access granted and location value could be retrieve
-        double longitude = Input.location.lastData.longitude;
-        double latitude = Input.location.lastData.latitude;
+        // If the connection failed this cancels location service use.
+        if (Input.location.status == LocationServiceStatus.Failed)
+        {
+            Debug.Log("Unable to determine device location");
+            yield break;
+        }
 
-        //AddLocation(latitude, longitude);
-        statusTxt.text = "" + Input.location.status + "  lat:" + latitude + "  long:" + longitude;
+        // If we reach here, we have successfully initialized the location service
+        // Now we can start getting location updates
+        while (true)
+        {
+            if (Input.location.status == LocationServiceStatus.Running)
+            {
+                statusTxt.text = $"Location: {Input.location.lastData.latitude:F6}, {Input.location.lastData.longitude:F6}";
+            }
+            else
+            {
+                statusTxt.text = "Location service not running";
+            }
 
-        //Stop retrieving location
+            // Wait for 1 second before the next update
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    private void OnDisable()
+    {
         Input.location.Stop();
-        StopCoroutine("Start");
     }
 }
