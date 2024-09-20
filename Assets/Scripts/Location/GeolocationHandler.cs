@@ -7,9 +7,6 @@ using UnityEngine.UI;
 public class GeolocationHandler : MonoBehaviour
 {
     public TMPro.TMP_Text statusTxt;
-    private Coroutine gpsCoroutine;
-    private float updateInterval = 5f; // Update every 5 seconds
-    private float timer;
 
     private void Start()
     {

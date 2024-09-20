@@ -163,7 +163,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.unity.template.ar_mobile
     Standalone: com.unity.template.ar-mobile
-    iPhone: com.unity.template.armobile
+    iPhone: com.DefaultCompany.AR-Mobile
   buildNumber:
     Bratwurst: 0
     Standalone: 0
@@ -555,9 +555,9 @@ PlayerSettings:
   enableInternalProfiler: 0
   logObjCUncaughtExceptions: 1
   enableCrashReportAPI: 0
-  cameraUsageDescription: AR Camera
-  locationUsageDescription: 
-  microphoneUsageDescription: 
+  cameraUsageDescription: Allow access to camera
+  locationUsageDescription: Allow access to location
+  microphoneUsageDescription: Allow access to microphone
   bluetoothUsageDescription: 
   macOSTargetOSVersion: 10.13.0
   switchNMETAOverride: 
@@ -927,4 +927,4 @@ PlayerSettings:
   hmiLoadingImage: {fileID: 0}
   platformRequiresReadableAssets: 0
   virtualTexturingSupportEnabled: 0
-  insecureHttpOption: 0
+  insecureHttpOption: 2
