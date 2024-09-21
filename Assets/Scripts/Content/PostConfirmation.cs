@@ -5,8 +5,19 @@ using UnityEngine.Video;
 
 public class PostConfirmation : MonoBehaviour
 {
-    [SerializeField] RawImage imageDisplay; // UI element for displaying images
-    [SerializeField] VideoPlayer videoPlayer; // Component for playing videos
+    [SerializeField] private RawImage imageDisplay;
+    [SerializeField] private VideoPlayer videoPlayer;
+    private AspectRatioFitter aspectRatioFitter;
+
+    void Awake()
+    {
+        // Get the AspectRatioFitter component attached to the same GameObject as the RawImage
+        aspectRatioFitter = imageDisplay.GetComponent<AspectRatioFitter>();
+        if (aspectRatioFitter == null)
+        {
+            Debug.LogError("AspectRatioFitter component not found on RawImage GameObject.");
+        }
+    }
 
     void OnEnable()
     {
@@ -36,8 +47,14 @@ public class PostConfirmation : MonoBehaviour
 
             imageDisplay.texture = texture;
             imageDisplay.gameObject.SetActive(true);
-            videoPlayer.enabled = false; // Disable video player
-            // Position imageDisplay in world space if needed
+            videoPlayer.enabled = false;
+
+            // Set the aspect ratio of the AspectRatioFitter to match the texture
+            if (aspectRatioFitter != null)
+            {
+                aspectRatioFitter.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
+                aspectRatioFitter.aspectRatio = (float)texture.width / texture.height;
+            }
         }
         else
         {
@@ -50,8 +67,11 @@ public class PostConfirmation : MonoBehaviour
     {
         videoPlayer.url = path;
         videoPlayer.Play();
-        imageDisplay.texture = videoPlayer.targetTexture; // Set RawImage texture to video
+        imageDisplay.texture = videoPlayer.targetTexture;
         imageDisplay.gameObject.SetActive(true);
-        videoPlayer.enabled = true; // Enable video player
+        videoPlayer.enabled = true;
+
+        // Optionally, set aspect ratio for video as well if needed
+        // Assuming you have a way to know or calculate video's aspect ratio
     }
 }
