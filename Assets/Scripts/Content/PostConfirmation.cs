@@ -11,7 +11,6 @@ public class PostConfirmation : MonoBehaviour
 
     void Awake()
     {
-
         // Get the AspectRatioFitter component attached to the parent of RawImage
         parentAspectRatioFitter = imageDisplay.transform.parent.GetComponent<AspectRatioFitter>();
         if (parentAspectRatioFitter == null)
@@ -63,7 +62,7 @@ public class PostConfirmation : MonoBehaviour
     private void LoadVideo(string path)
     {
         videoPlayer.url = path;
-        videoPlayer.Play();
+        // videoPlayer.Play();
         imageDisplay.texture = videoPlayer.targetTexture;
         imageDisplay.gameObject.SetActive(true);
         videoPlayer.enabled = true;
