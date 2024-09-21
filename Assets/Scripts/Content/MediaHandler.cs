@@ -1,10 +1,18 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class MediaHandler : MonoBehaviour
 {
+    public static string mediaPath;
+    [SerializeField] GameObject postConfirmationPanel; // Reference to the post confirmation UI panel
+    [SerializeField] GameObject mediaOptionsPanel; // Reference to the media options UI panel
+
+
+    public void Start()
+    {
+        postConfirmationPanel = GameObject.Find("PostConfirmationPanel");
+    }
     public void PickMediaFromGallery()
     {
         if (NativeGallery.CanSelectMultipleMediaTypesFromGallery())
@@ -14,13 +22,8 @@ public class MediaHandler : MonoBehaviour
                 Debug.Log("Media path: " + path);
                 if (path != null)
                 {
-                    // Determine if user has picked an image, video or neither of these
-                    switch (NativeGallery.GetMediaTypeOfFile(path))
-                    {
-                        case NativeGallery.MediaType.Image: Debug.Log("Picked image"); break;
-                        case NativeGallery.MediaType.Video: Debug.Log("Picked video"); break;
-                        default: Debug.Log("Probably picked something else"); break;
-                    }
+                    mediaPath = path;
+                    GoToPostScreen();
                 }
             }, NativeGallery.MediaType.Image | NativeGallery.MediaType.Video, "Select an image or video");
 
@@ -28,21 +31,20 @@ public class MediaHandler : MonoBehaviour
         }
     }
 
+    public void GoToPostScreen()
+    {
+        // Activate the post confirmation panel
+        postConfirmationPanel.SetActive(true);
+        mediaOptionsPanel.SetActive(false);
+    }
+
     public void CapturePhoto()
     {
-        // Use NatDevice or another plugin to capture a photo
-        // Example with hypothetical API:
-        // NatDevice.CapturePhoto((Texture2D photo) => {
-        //     // Handle captured photo
-        // });
+        // Implement photo capture logic here
     }
 
     public void CaptureVideo()
     {
-        // Use NatDevice or another plugin to capture video
-        // Example with hypothetical API:
-        // NatDevice.CaptureVideo((string videoPath) => {
-        //     // Handle captured video
-        // });
+        // Implement video capture logic here
     }
 }
