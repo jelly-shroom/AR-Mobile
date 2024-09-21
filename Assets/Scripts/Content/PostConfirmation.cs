@@ -32,10 +32,16 @@ public class PostConfirmation : MonoBehaviour
         Texture2D texture = NativeGallery.LoadImageAtPath(path);
         if (texture != null)
         {
+            Debug.Log("Image loaded successfully");
+
             imageDisplay.texture = texture;
             imageDisplay.gameObject.SetActive(true);
-            videoPlayer.gameObject.SetActive(false);
+            videoPlayer.enabled = false; // Disable video player
             // Position imageDisplay in world space if needed
+        }
+        else
+        {
+            Debug.LogError("Failed to load image");
         }
         yield return null;
     }
@@ -44,8 +50,8 @@ public class PostConfirmation : MonoBehaviour
     {
         videoPlayer.url = path;
         videoPlayer.Play();
-        videoPlayer.gameObject.SetActive(true);
-        imageDisplay.gameObject.SetActive(false);
-        // Position videoPlayer's RenderTexture in world space if needed
+        imageDisplay.texture = videoPlayer.targetTexture; // Set RawImage texture to video
+        imageDisplay.gameObject.SetActive(true);
+        videoPlayer.enabled = true; // Enable video player
     }
 }

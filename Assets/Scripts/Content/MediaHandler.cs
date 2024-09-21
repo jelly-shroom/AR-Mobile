@@ -11,7 +11,7 @@ public class MediaHandler : MonoBehaviour
 
     public void Start()
     {
-        postConfirmationPanel = GameObject.Find("PostConfirmationPanel");
+        // postConfirmationPanel = GameObject.Find("PostConfirmationPanel");
     }
     public void PickMediaFromGallery()
     {
