@@ -7,15 +7,16 @@ public class PostConfirmation : MonoBehaviour
 {
     [SerializeField] private RawImage imageDisplay;
     [SerializeField] private VideoPlayer videoPlayer;
-    private AspectRatioFitter aspectRatioFitter;
+    private AspectRatioFitter parentAspectRatioFitter;
 
     void Awake()
     {
-        // Get the AspectRatioFitter component attached to the same GameObject as the RawImage
-        aspectRatioFitter = imageDisplay.GetComponent<AspectRatioFitter>();
-        if (aspectRatioFitter == null)
+
+        // Get the AspectRatioFitter component attached to the parent of RawImage
+        parentAspectRatioFitter = imageDisplay.transform.parent.GetComponent<AspectRatioFitter>();
+        if (parentAspectRatioFitter == null)
         {
-            Debug.LogError("AspectRatioFitter component not found on RawImage GameObject.");
+            Debug.LogError("AspectRatioFitter component not found on parent GameObject.");
         }
     }
 
@@ -49,12 +50,8 @@ public class PostConfirmation : MonoBehaviour
             imageDisplay.gameObject.SetActive(true);
             videoPlayer.enabled = false;
 
-            // Set the aspect ratio of the AspectRatioFitter to match the texture
-            if (aspectRatioFitter != null)
-            {
-                aspectRatioFitter.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
-                aspectRatioFitter.aspectRatio = (float)texture.width / texture.height;
-            }
+            // Set aspect ratio for image
+            SetAspectRatios((float)texture.width / texture.height);
         }
         else
         {
@@ -71,7 +68,20 @@ public class PostConfirmation : MonoBehaviour
         imageDisplay.gameObject.SetActive(true);
         videoPlayer.enabled = true;
 
-        // Optionally, set aspect ratio for video as well if needed
-        // Assuming you have a way to know or calculate video's aspect ratio
+        // Assuming you have access to the video's aspect ratio
+        float videoAspectRatio = (float)videoPlayer.clip.width / videoPlayer.clip.height;
+
+        // Set aspect ratio for video
+        SetAspectRatios(videoAspectRatio);
+    }
+
+    private void SetAspectRatios(float aspectRatio)
+    {
+        // Set the aspect ratio of the parent with mask
+        if (parentAspectRatioFitter != null)
+        {
+            parentAspectRatioFitter.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
+            parentAspectRatioFitter.aspectRatio = aspectRatio;
+        }
     }
 }
