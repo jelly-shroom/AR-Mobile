@@ -12,6 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/MobileAR.unity
     guid: 025e445a5c1424714b0a8bcb09d62e50
   m_configObjects:
+    Niantic.Lightship.AR.LightshipSettings: {fileID: 11400000, guid: fae2674e5b96640ef91eb75fd15917b4,
+      type: 2}
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 6ee72d15cf39dd748a13eac57397b9af,
       type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 0465d33c6aee55f44b0237db8b0e0259,
