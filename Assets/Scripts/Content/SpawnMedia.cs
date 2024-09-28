@@ -29,6 +29,7 @@ public class SpawnMedia : MonoBehaviour
     [SerializeField]
     [Tooltip("The list of prefabs available to spawn.")]
     List<GameObject> m_ObjectPrefabs = new List<GameObject>();
+    private Texture2D loadedTexture;
 
     /// <summary>
     /// The list of prefabs available to spawn.
@@ -158,6 +159,15 @@ public class SpawnMedia : MonoBehaviour
     void Awake()
     {
         EnsureFacingCamera();
+
+        string path = MediaHandler.mediaPath;
+        loadedTexture = NativeGallery.LoadImageAtPath(path);
+
+        if (loadedTexture == null)
+        {
+            Debug.LogError("Failed to load image");
+            return;
+        }
     }
 
     void EnsureFacingCamera()
@@ -231,9 +241,34 @@ public class SpawnMedia : MonoBehaviour
         }
 
         objectSpawned?.Invoke(newObject);
-        var prefabModifier = new PrefabModifier();
-        prefabModifier.ModifySpawnedObject(newObject);
+        ModifySpawnedObject(newObject);
+
         return true;
+    }
+
+    private void ModifySpawnedObject(GameObject spawnedObject)
+    {
+        if (spawnedObject == null || loadedTexture == null) return;
+
+        MeshRenderer meshRenderer = spawnedObject.GetComponent<MeshRenderer>();
+        if (meshRenderer != null && meshRenderer.material != null)
+        {
+            meshRenderer.material = new Material(meshRenderer.material);
+            meshRenderer.material.mainTexture = loadedTexture;
+            Debug.Log("Texture applied to spawned object");
+
+            // Adjust scale to maintain aspect ratio
+            float aspectRatio = (float)loadedTexture.width / loadedTexture.height;
+            Vector3 newScale = spawnedObject.transform.localScale;
+
+            if (aspectRatio > 1) // Wider than tall
+                newScale.x = newScale.y * aspectRatio;
+            else // Taller than wide or square
+                newScale.y = newScale.x / aspectRatio;
+
+            spawnedObject.transform.localScale = newScale;
+            Debug.Log("Prefab scale adjusted to maintain aspect ratio");
+        }
     }
 }
 

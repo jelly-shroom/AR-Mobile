@@ -1,15 +1,25 @@
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
+using StarterAssets = UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 public class PrefabModifier : MonoBehaviour
 {
-    [SerializeField] private SpawnMedia objectSpawner; // Reference to your ObjectSpawner
+    [SerializeField] private StarterAssets.ObjectSpawner objectSpawner; // Reference to your ObjectSpawner
     private Texture2D loadedTexture;
 
     void Start()
     {
-        // Load your texture here
-        string path = MediaHandler.mediaPath;
+        // Subscribe to the OnImageSelected event
+        MediaHandler.OnImageSelected += LoadAndModifyPrefab;
+    }
+
+    private void OnDestroy()
+    {
+        // Unsubscribe from the event to avoid memory leaks
+        MediaHandler.OnImageSelected -= LoadAndModifyPrefab;
+    }
+
+    private void LoadAndModifyPrefab(string path)
+    {
         loadedTexture = NativeGallery.LoadImageAtPath(path);
 
         if (loadedTexture == null)
@@ -22,12 +32,6 @@ public class PrefabModifier : MonoBehaviour
         objectSpawner.objectSpawned += ModifySpawnedObject;
     }
 
-    private void OnDestroy()
-    {
-        // Unsubscribe from the event to avoid memory leaks
-        objectSpawner.objectSpawned -= ModifySpawnedObject;
-    }
-
     public void ModifySpawnedObject(GameObject spawnedObject)
     {
         if (spawnedObject == null || loadedTexture == null) return;
@@ -35,6 +39,7 @@ public class PrefabModifier : MonoBehaviour
         MeshRenderer meshRenderer = spawnedObject.GetComponent<MeshRenderer>();
         if (meshRenderer != null && meshRenderer.material != null)
         {
+            meshRenderer.material = new Material(meshRenderer.material);
             meshRenderer.material.mainTexture = loadedTexture;
             Debug.Log("Texture applied to spawned object");
 
@@ -54,5 +59,8 @@ public class PrefabModifier : MonoBehaviour
             spawnedObject.transform.localScale = newScale;
             Debug.Log("Prefab scale adjusted to maintain aspect ratio");
         }
+
+        // Unsubscribe after modification to prevent repeated modifications
+        objectSpawner.objectSpawned -= ModifySpawnedObject;
     }
 }

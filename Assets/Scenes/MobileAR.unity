@@ -1033,7 +1033,11 @@ PrefabInstance:
         type: 3}
       insertIndex: 0
       addedObject: {fileID: 436358034}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2512387469002778309, guid: 48cb3fb68c91eb94999fd99957eb0cae,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 48cb3fb68c91eb94999fd99957eb0cae, type: 3}
 --- !u!114 &331264286 stripped
 MonoBehaviour:
@@ -1195,6 +1199,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 436358034}
+  - component: {fileID: 436358037}
   - component: {fileID: 436358036}
   - component: {fileID: 436358035}
   m_Layer: 0
@@ -1228,33 +1233,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 436358032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 956dd6cf70eaca449a45b6a95b96c8c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_CameraToFace: {fileID: 0}
-  m_ObjectPrefabs:
-  - {fileID: 5034689991030491768, guid: 111697b8952234c8f891e8b284448882, type: 3}
-  m_SpawnVisualizationPrefab: {fileID: 0}
-  m_SpawnOptionIndex: 0
-  m_OnlySpawnInView: 1
-  m_ViewportPeriphery: 0
-  m_ApplyRandomAngleAtSpawn: 1
-  m_SpawnAngleRange: 45
-  m_SpawnAsChildren: 1
---- !u!114 &436358036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436358032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba63293f961b46a1a5b648e4ba02cfb5, type: 3}
+  m_Script: {fileID: 11500000, guid: cfd18e265b8454166a3451e18e5abec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ARInteractor: {fileID: 331264286}
-  m_ObjectSpawner: {fileID: 0}
+  m_SpawnMedia: {fileID: 436358036}
   m_RequireHorizontalUpSurface: 0
   m_SpawnTriggerType: 0
   m_SpawnObjectInput:
@@ -1263,7 +1246,7 @@ MonoBehaviour:
       m_Name: Spawn Object
       m_Type: 1
       m_ExpectedControlType: 
-      m_Id: fbf635cc-1cce-4e76-b5da-884262aa4ff8
+      m_Id: 866c9ef2-34d9-474c-bc5a-0fbaee1c323f
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1272,7 +1255,7 @@ MonoBehaviour:
       m_Name: Spawn Object Value
       m_Type: 0
       m_ExpectedControlType: Axis
-      m_Id: 41c5674a-9ed2-4632-9fb8-50b9719c1317
+      m_Id: 0e956a67-4d8d-4410-abbf-1d88f19110c9
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1288,6 +1271,41 @@ MonoBehaviour:
     m_ManualQueueValue: 0
     m_ManualQueueTargetFrame: 0
   m_BlockSpawnWhenInteractorHasSelection: 1
+--- !u!114 &436358036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436358032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 832c6e725d4cc422d852e42101d8c7dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CameraToFace: {fileID: 0}
+  m_ObjectPrefabs:
+  - {fileID: 5034689991030491768, guid: 111697b8952234c8f891e8b284448882, type: 3}
+  m_SpawnVisualizationPrefab: {fileID: 0}
+  m_SpawnOptionIndex: 0
+  m_OnlySpawnInView: 1
+  m_ViewportPeriphery: 0
+  m_ApplyRandomAngleAtSpawn: 1
+  m_SpawnAngleRange: 45
+  m_SpawnAsChildren: 1
+--- !u!114 &436358037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436358032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09fbf6d91cb1d4d3b909391b2346b789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectSpawner: {fileID: 0}
 --- !u!1 &475292382
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,10 +1512,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 478308530}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09fbf6d91cb1d4d3b909391b2346b789, type: 3}
+  m_Script: {fileID: 11500000, guid: fee1de0c0c44a4e3e99cd4d50acc64dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectSpawner: {fileID: 0}
+  mainCamera: {fileID: 1619606386}
+  spawnMedia: {fileID: 436358036}
 --- !u!1 &486158270
 GameObject:
   m_ObjectHideFlags: 0
@@ -4592,6 +4611,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600815109}
   m_CullTransparentMesh: 1
+--- !u!20 &1619606386 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2512387469002778331, guid: 48cb3fb68c91eb94999fd99957eb0cae,
+    type: 3}
+  m_PrefabInstance: {fileID: 331264285}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1756045394
 GameObject:
   m_ObjectHideFlags: 0

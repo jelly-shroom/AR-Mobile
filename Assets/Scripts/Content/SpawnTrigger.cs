@@ -45,15 +45,15 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
 
         [SerializeField]
         [Tooltip("The behavior to use to spawn objects.")]
-        ObjectSpawner m_ObjectSpawner;
+        SpawnMedia m_SpawnMedia;
 
         /// <summary>
         /// The behavior to use to spawn objects.
         /// </summary>
-        public ObjectSpawner objectSpawner
+        public SpawnMedia SpawnMedia
         {
-            get => m_ObjectSpawner;
-            set => m_ObjectSpawner = value;
+            get => m_SpawnMedia;
+            set => m_SpawnMedia = value;
         }
 
         [SerializeField]
@@ -133,11 +133,11 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
         /// </summary>
         void Start()
         {
-            if (m_ObjectSpawner == null)
+            if (m_SpawnMedia == null)
 #if UNITY_2023_1_OR_NEWER
-                m_ObjectSpawner = FindAnyObjectByType<ObjectSpawner>();
+                m_SpawnMedia = FindAnyObjectByType<SpawnMedia>();
 #else
-                m_ObjectSpawner = FindObjectOfType<ObjectSpawner>();
+                m_SpawnMedia = FindObjectOfType<SpawnMedia>();
 #endif
 
             if (m_ARInteractor == null)
@@ -169,7 +169,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
                     if (m_RequireHorizontalUpSurface && arPlane.alignment != PlaneAlignment.HorizontalUp)
                         return;
 
-                    m_ObjectSpawner.TrySpawnObject(arRaycastHit.pose.position, arPlane.normal);
+                    m_SpawnMedia.TrySpawnObject(arRaycastHit.pose.position, arPlane.normal);
                 }
 
                 return;

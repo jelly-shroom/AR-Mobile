@@ -9,6 +9,8 @@ public class MediaHandler : MonoBehaviour
     [SerializeField] GameObject mediaOptionsPanel; // Reference to the media options UI panel
     [SerializeField] GameObject postPreview;
 
+    public delegate void ImageSelectedEvent(string path);
+    public static event ImageSelectedEvent OnImageSelected;
 
     public void PickMediaFromGallery()
     {
@@ -21,6 +23,9 @@ public class MediaHandler : MonoBehaviour
                 {
                     mediaPath = path;
                     GoToPostScreen();
+
+                    // Trigger the event
+                    OnImageSelected?.Invoke(path);
                 }
             }, NativeGallery.MediaType.Image | NativeGallery.MediaType.Video, "Select an image or video");
 
