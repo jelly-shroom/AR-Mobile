@@ -28,7 +28,7 @@
       "hash": "018647d4e73e9a9c5330d0716a351fe7b7cd4978"
     },
     "com.unity.burst": {
-      "version": "1.8.17",
+      "version": "1.8.16",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -130,7 +130,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.netcode.gameobjects": {
-      "version": "1.10.0",
+      "version": "1.9.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -240,7 +240,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.transport": {
-      "version": "1.5.0",
+      "version": "1.4.1",
       "depth": 2,
       "source": "registry",
       "dependencies": {
@@ -360,7 +360,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.openxr": {
-      "version": "1.12.0",
+      "version": "1.11.0",
       "depth": 1,
       "source": "registry",
       "dependencies": {

@@ -24,6 +24,9 @@ public class MediaHandler : MonoBehaviour
                     mediaPath = path;
                     GoToPostScreen();
 
+                    SpawnMedia spawnMediaInstance = new SpawnMedia();
+                    spawnMediaInstance.LoadTexture();
+
                     // Trigger the event
                     OnImageSelected?.Invoke(path);
                 }
