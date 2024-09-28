@@ -231,6 +231,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             }
 
             objectSpawned?.Invoke(newObject);
+            // var prefabModifier = new PrefabModifier();
+            // prefabModifier.ModifySpawnedObject(newObject);
             return true;
         }
     }

@@ -1,9 +1,9 @@
 using UnityEngine;
-using StarterAssets = UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 public class PrefabModifier : MonoBehaviour
 {
-    [SerializeField] private StarterAssets.ObjectSpawner objectSpawner; // Reference to your ObjectSpawner
+    [SerializeField] private SpawnMedia objectSpawner; // Reference to your ObjectSpawner
     private Texture2D loadedTexture;
 
     void Start()

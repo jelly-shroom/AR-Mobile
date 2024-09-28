@@ -7,12 +7,9 @@ public class MediaHandler : MonoBehaviour
     public static string mediaPath;
     [SerializeField] GameObject postConfirmationPanel; // Reference to the post confirmation UI panel
     [SerializeField] GameObject mediaOptionsPanel; // Reference to the media options UI panel
+    [SerializeField] GameObject postPreview;
 
 
-    public void Start()
-    {
-        // postConfirmationPanel = GameObject.Find("PostConfirmationPanel");
-    }
     public void PickMediaFromGallery()
     {
         if (NativeGallery.CanSelectMultipleMediaTypesFromGallery())
