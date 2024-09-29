@@ -40,6 +40,8 @@ public class HandlePostTexture : MonoBehaviour
 
     private IEnumerator LoadImage(string path)
     {
+        yield return null; // Yield to ensure this runs asynchronously
+
         Texture2D texture = NativeGallery.LoadImageAtPath(path);
         if (texture != null)
         {
@@ -56,7 +58,6 @@ public class HandlePostTexture : MonoBehaviour
         {
             Debug.LogError("Failed to load image");
         }
-        yield return null;
     }
 
     private void LoadVideo(string path)

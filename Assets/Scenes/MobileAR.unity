@@ -1278,7 +1278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832c6e725d4cc422d852e42101d8c7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CameraToFace: {fileID: 0}
+  m_CameraToFace: {fileID: 1619606386}
   m_ObjectPrefabs:
   - {fileID: 5034689991030491768, guid: 111697b8952234c8f891e8b284448882, type: 3}
   m_SpawnOptionIndex: 0
@@ -4578,6 +4578,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600815109}
   m_CullTransparentMesh: 1
+--- !u!20 &1619606386 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2512387469002778331, guid: 48cb3fb68c91eb94999fd99957eb0cae,
+    type: 3}
+  m_PrefabInstance: {fileID: 331264285}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1756045394
 GameObject:
   m_ObjectHideFlags: 0
