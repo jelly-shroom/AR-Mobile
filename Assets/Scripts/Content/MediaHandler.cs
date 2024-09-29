@@ -23,12 +23,6 @@ public class MediaHandler : MonoBehaviour
                 {
                     mediaPath = path;
                     GoToPostScreen();
-
-                    SpawnMedia spawnMediaInstance = new SpawnMedia();
-                    spawnMediaInstance.LoadTexture();
-
-                    // Trigger the event
-                    OnImageSelected?.Invoke(path);
                 }
             }, NativeGallery.MediaType.Image | NativeGallery.MediaType.Video, "Select an image or video");
 

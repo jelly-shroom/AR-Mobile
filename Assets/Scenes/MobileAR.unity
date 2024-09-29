@@ -1281,13 +1281,13 @@ MonoBehaviour:
   m_CameraToFace: {fileID: 0}
   m_ObjectPrefabs:
   - {fileID: 5034689991030491768, guid: 111697b8952234c8f891e8b284448882, type: 3}
-  m_SpawnVisualizationPrefab: {fileID: 0}
   m_SpawnOptionIndex: 0
   m_OnlySpawnInView: 1
   m_ViewportPeriphery: 0
   m_ApplyRandomAngleAtSpawn: 1
   m_SpawnAngleRange: 45
   m_SpawnAsChildren: 1
+  isSpawnOptionRandomized: 0
 --- !u!1 &475292382
 GameObject:
   m_ObjectHideFlags: 0
@@ -1447,7 +1447,6 @@ GameObject:
   m_Component:
   - component: {fileID: 478308532}
   - component: {fileID: 478308531}
-  - component: {fileID: 478308533}
   m_Layer: 0
   m_Name: MediaManager
   m_TagString: Untagged
@@ -1485,20 +1484,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &478308533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 478308530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fee1de0c0c44a4e3e99cd4d50acc64dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 1619606386}
-  spawnMedia: {fileID: 436358036}
 --- !u!1 &486158270
 GameObject:
   m_ObjectHideFlags: 0
@@ -4593,12 +4578,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600815109}
   m_CullTransparentMesh: 1
---- !u!20 &1619606386 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 2512387469002778331, guid: 48cb3fb68c91eb94999fd99957eb0cae,
-    type: 3}
-  m_PrefabInstance: {fileID: 331264285}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1756045394
 GameObject:
   m_ObjectHideFlags: 0

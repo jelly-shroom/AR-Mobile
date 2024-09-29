@@ -15,8 +15,6 @@ public class SpawnMedia : MonoBehaviour
     [SerializeField] private bool isSpawnOptionRandomized;
 
 
-    private Texture2D loadedTexture;
-
     void Awake()
     {
         EnsureFacingCamera();
@@ -26,17 +24,6 @@ public class SpawnMedia : MonoBehaviour
     {
         if (m_CameraToFace == null)
             m_CameraToFace = Camera.main;
-    }
-
-    public void LoadTexture()
-    {
-        string path = MediaHandler.mediaPath;
-        loadedTexture = NativeGallery.LoadImageAtPath(path);
-
-        if (loadedTexture == null)
-        {
-            Debug.LogError("Failed to load image");
-        }
     }
 
     public bool TrySpawnObject(Vector3 spawnPoint, Vector3 spawnNormal)
@@ -62,6 +49,7 @@ public class SpawnMedia : MonoBehaviour
         EnsureFacingCamera();
         var facePosition = m_CameraToFace.transform.position;
         var forward = facePosition - spawnPoint;
+        newObject.transform.localScale = newObject.transform.localScale.x * 0.1f * Vector3.one;
 
         BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
         newObject.transform.rotation = Quaternion.LookRotation(projectedForward, spawnNormal);
@@ -72,32 +60,6 @@ public class SpawnMedia : MonoBehaviour
             newObject.transform.Rotate(Vector3.up, randomRotation);
         }
 
-        ModifySpawnedObject(newObject);
-
         return true;
-    }
-
-    private void ModifySpawnedObject(GameObject spawnedObject)
-    {
-        if (spawnedObject == null || loadedTexture == null) return;
-
-        MeshRenderer meshRenderer = spawnedObject.GetComponent<MeshRenderer>();
-        if (meshRenderer != null && meshRenderer.material != null)
-        {
-            MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
-            propertyBlock.SetTexture("_MainTex", loadedTexture);
-            meshRenderer.SetPropertyBlock(propertyBlock);
-
-            float aspectRatio = (float)loadedTexture.width / loadedTexture.height;
-            Vector3 newScale = spawnedObject.transform.localScale;
-
-            if (aspectRatio > 1) // Wider than tall
-                newScale.x = newScale.y * aspectRatio;
-            else // Taller than wide or square
-                newScale.y = newScale.x / aspectRatio;
-
-            spawnedObject.transform.localScale = newScale;
-            Debug.Log("Prefab scale adjusted to maintain aspect ratio");
-        }
     }
 }
